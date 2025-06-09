@@ -64,7 +64,6 @@ function transformText($arr, $arrayNumber) {
             $mid = floor(strlen($core) / 2);
             $placeholderForMiddleCharacters = substr($core, $mid - 1, 3);
         }
-        
 
         // End Solution Edits
         echo "<div>";
