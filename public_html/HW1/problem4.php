@@ -2,7 +2,7 @@
 
 require_once "base.php";
 
-$ucid = "mt85"; // <-- set your ucid
+$ucid = "may23"; // <-- set your ucid
 
 // Don't edit the arrays below, they are used to test your code
 $array1 = ["hello world!", "php programming", "special@#$%^&characters", "numbers 123 456", "mIxEd CaSe InPut!"];
@@ -32,7 +32,38 @@ function transformText($arr, $arrayNumber) {
     $placeholderForMiddleCharacters = "";
     foreach ($arr as $index => $text) {
         // Start Solution Edits
+        
+        // UCID: may23, Date: 6/9/2025
+        // Plan:
+        // 1. Remove non-alphanumeric characters (except spaces) using regex
+        // 2. Convert to Title Case using ucwords(strtolower(...))
+        // 3. Trim and reduce multiple spaces to a single space
+        // 4. For extra credit:
+        //    - Remove first and last character
+        //    - If remaining length < 3, set "Not enough characters"
+        //    - Otherwise, extract the middle 3 characters
 
+        // Step 1: Remove special characters (except space)
+        $cleaned = preg_replace('/[^a-zA-Z0-9 ]/', '', $text);
+
+        // Step 2: Reduce multiple spaces to a single space
+        $cleaned = preg_replace('/\s+/', ' ', $cleaned);
+
+        // Step 3: Trim leading/trailing spaces
+        $cleaned = trim($cleaned);
+
+        // Step 4: Convert to Title Case
+        $placeholderForModifiedPhrase = ucwords(strtolower($cleaned));
+
+        // Step 5: Extra credit - middle 3 characters (excluding first and last)
+        $core = substr($placeholderForModifiedPhrase, 1, -1);  // exclude first and last char
+
+        if (strlen($core) < 3) {
+            $placeholderForMiddleCharacters = "Not enough characters";
+        } else {
+            $mid = floor(strlen($core) / 2);
+            $placeholderForMiddleCharacters = substr($core, $mid - 1, 3);
+        }
         
 
         // End Solution Edits

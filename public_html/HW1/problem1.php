@@ -22,7 +22,7 @@ function printOdds($arr, $arrayNumber)
 
     echo "Output Array: ";
     // Start Solution Edits
-    // may23 - 6/9/2025
+    // UCID: may23, Date: 6/9/2025
     // Plan:
     // - Loop through the array
     // - Check if each number is odd (i.e., number % 2 != 0)

@@ -2,7 +2,7 @@
 
 require_once "base.php";
 
-$ucid = "mt85"; // <-- set your ucid
+$ucid = "may23"; // <-- set your ucid
 
 // Don't edit the arrays below, they are used to test your code
 $array1 = [42, -17, 89, -256, 1024, -4096, 50000, -123456];
@@ -24,7 +24,33 @@ function bePositive($arr, $arrayNumber)
 
     $output = array_fill(0, count($arr), null); // Initialize output array
     // Start Solution Edits
+    
+    // UCID: may23, Date: 6/9/2025
+    // Plan:
+    // - Loop through each element of the input array
+    // - Convert the element to its correct numeric value if it's a string
+    // - Use abs() to make the value positive
+    // - Convert it back to its original type:
+    //     - if original was string, convert back to string using (string)
+    //     - if original was int, keep as int
+    //     - if original was float, keep as float
+    // - Store the result in the $output array at the same index
 
+    foreach ($arr as $i => $val) {
+        $type = gettype($val);
+        $positive = abs($val);
+
+        if ($type === "string") {
+            $output[$i] = (string)$positive;
+        } elseif ($type === "integer") {
+            $output[$i] = (int)$positive;
+        } elseif ($type === "double") {
+            $output[$i] = (float)$positive;
+        } else {
+            // fallback if it's a weird type
+            $output[$i] = $positive;
+        }
+    }
 
     // End Solution Edits
     echo "<span>Output: </span>";
