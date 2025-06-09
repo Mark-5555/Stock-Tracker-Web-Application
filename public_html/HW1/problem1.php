@@ -36,14 +36,16 @@ function printOdds($arr, $arrayNumber)
     // - Store odd numbers in a new array
     // - Join the odd numbers with commas and print them
 
-    $odds = [];
+    $first = true;
     foreach ($arr as $val) {
         if ($val % 2 != 0) {
-            $odds[] = $val;
+            if (!$first) {
+                echo ", ";
+            }
+            echo $val;
+            $first = false;
         }
     }
-    echo implode(", ", $odds);
-
 
     // End Solution Edits
     echo "<br>______________________________________<br>";
