@@ -2,7 +2,7 @@
 
 require_once "base.php";
 
-$ucid = "mt85"; // <-- set your ucid
+$ucid = "may23"; // <-- set your ucid
 
 // Don't edit the arrays below, they are used to test your code
 $array1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -22,6 +22,27 @@ function printOdds($arr, $arrayNumber)
 
     echo "Output Array: ";
     // Start Solution Edits
+    // may23 - 6/9/2025
+    // Plan:
+    // - Loop through the array
+    // - Check if each number is odd (i.e., number % 2 != 0)
+    // - Store odd numbers in a new array
+    // - Join the odd numbers with commas and print them
+        // Start Solution Edits
+    // UCID: mt85, Date: 6/9/2025
+    // Plan:
+    // - Loop through the array
+    // - Check if each number is odd (i.e., number % 2 != 0)
+    // - Store odd numbers in a new array
+    // - Join the odd numbers with commas and print them
+
+    $odds = [];
+    foreach ($arr as $val) {
+        if ($val % 2 != 0) {
+            $odds[] = $val;
+        }
+    }
+    echo implode(", ", $odds);
 
 
     // End Solution Edits
