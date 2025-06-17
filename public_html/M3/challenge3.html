@@ -32,7 +32,7 @@ Requirements:
         </ul>
     </nav>
     <!-- Edit your UCID here -->
-    <header>Header Section (mt85)</header>
+    <header>Header Section (may23)</header>
     <!-- Don't make any other edits to the HTML -->
     <nav>
         <button>Previous</button>
@@ -54,9 +54,96 @@ Requirements:
 <script src="util.js"></script>
 
 <script>
-    /* Solve the button logic here by finding and attaching an appropriate event listener and logic*/
+    const panels = document.querySelectorAll('.panel');
+    const container = document.querySelector('.carousel-container');
+    const prevBtn = document.querySelectorAll('button')[0];
+    const nextBtn = document.querySelectorAll('button')[1];
+
+    let index = 0;
+
+    function updateCarousel() {
+        container.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+        index = (index - 1 + panels.length) % panels.length;
+        updateCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        index = (index + 1) % panels.length;
+        updateCarousel();
+    });
+
+
+    let startX = 0;
+    container.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+    });
+
+    container.addEventListener('touchend', e => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = endX - startX;
+        if (Math.abs(diff) > 50) {
+            if (diff < 0) {
+                index = (index + 1) % panels.length;
+            } else {
+                index = (index - 1 + panels.length) % panels.length;
+            }
+            updateCarousel();
+        }
+    });
+
 </script>
 
 <style>
-    /* You're free to make whatever edits you need here, just don't override anything in the styles.css */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    header {
+        height: 60px;
+        line-height: 60px;
+        background: #f0f0f0;
+        text-align: center;
+        border: 2px solid black;
+    }
+
+    /* Buttons container - second <nav> */
+    body > nav:nth-of-type(2) {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .carousel {
+        width: 100%;
+        height: calc(100vh - 60px - 60px); /* Full height minus header and buttons */
+        overflow: hidden;
+        position: relative;
+    }
+
+    .carousel-container {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .panel {
+        width: 100%;
+        height: 100%;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        background: #e0e0e0;
+        border: 1px solid #aaa;
+    }
 </style>
+

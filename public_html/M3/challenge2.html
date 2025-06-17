@@ -36,7 +36,7 @@ Requirements:
         </ul>
     </nav>
     <!-- Edit your UCID here -->
-    <header>Header Section (mt85)</header>
+    <header>Header Section (may23)</header>
     <!-- Don't make any other edits to the HTML -->
     <div class="container">
         <aside id="left-sidebar">
@@ -94,10 +94,78 @@ Requirements:
 
 <script src="util.js"></script>
 
+
 <script>
-    /* Solve the button logic here by finding and attaching an appropriate event listener and logic*/
+    // Left Sidebar
+    const leftSidebar = document.getElementById("left-sidebar");
+    const leftBtn = leftSidebar.querySelector("button");
+
+    leftBtn.addEventListener("click", () => {
+        leftSidebar.classList.toggle("collapsed");
+        leftBtn.textContent = leftSidebar.classList.contains("collapsed") ? "<" : ">";
+    });
+
+    // Right Sidebar
+    const rightSidebar = document.getElementById("right-sidebar");
+    const rightBtn = rightSidebar.querySelector("button");
+
+    rightBtn.addEventListener("click", () => {
+        rightSidebar.classList.toggle("collapsed");
+        rightBtn.textContent = rightSidebar.classList.contains("collapsed") ? ">" : "<";
+    });
 </script>
 
 <style>
-    /* You're free to make whatever edits you need here, just don't override anything in the styles.css */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        height: 60px;
+        background: #eee;
+        border: 2px solid black;
+        text-align: center;
+        line-height: 60px;
+        box-sizing: border-box;
+    }
+
+    .container {
+        display: flex;
+        height: calc(100% - 60px); 
+    }
+
+    aside {
+        width: 15%;
+        background: #f0f0f0;
+        border: 2px solid black;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        transition: width 0.3s;
+    }
+
+    aside button {
+        margin-bottom: 10px;
+    }
+
+    .content {
+        flex-grow: 1;
+        padding: 20px;
+        border: 2px solid black;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
+
+    .collapsed {
+        width: 40px !important;
+        padding: 10px 5px !important;
+    }
+
+    .collapsed ul {
+        display: none;
+    }
 </style>

@@ -27,7 +27,7 @@ Requirements:
         </ul>
     </nav>
     <!-- Edit your UCID here -->
-    <header>Header Section (mt85)</header>
+    <header>Header Section (may23)</header>
     <!-- Don't make any other edits to the HTML -->
     <main>
         <div class="content">
@@ -48,7 +48,6 @@ Requirements:
                 porttitor mi non consectetur dictum.</p>
         </div>
     </main>
-
     <footer>Footer Section</footer>
 </body>
 
@@ -56,6 +55,65 @@ Requirements:
 <script src="util.js"></script>
 
 <style>
-    /* You're free to make whatever edits you need here, just don't override anything in the styles.css */
-    /* See the requirements at the top. If easier, you may copy/paste them here*/
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevent window scroll */
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: #ddd;
+        z-index: 1000;
+        border-bottom: 2px solid black;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        box-sizing: border-box;
+    }
+
+    header, footer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        height: 60px;
+        line-height: 60px;
+        background-color: #f0f0f0;
+        border: 2px solid black;
+        text-align: center;
+        box-sizing: border-box;
+        z-index: 900;
+    }
+
+    header {
+        top: 40px; /* below nav */
+    }
+
+    footer {
+        bottom: 0;
+    }
+
+    main {
+        position: absolute;
+        top: 100px; /* nav (40) + header (60) */
+        bottom: 60px; /* footer height */
+        left: 0;
+        right: 0;
+        overflow-y: auto;
+        border: 2px solid black;
+        box-sizing: border-box;
+    }
+
+    .content {
+        padding: 20px;
+    }
 </style>
+
+
+
+
