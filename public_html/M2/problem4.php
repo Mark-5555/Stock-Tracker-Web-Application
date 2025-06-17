@@ -56,7 +56,7 @@ function transformText($arr, $arrayNumber) {
         $placeholderForModifiedPhrase = ucwords(strtolower($cleaned));
 
         // Step 5: Extra credit - middle 3 characters (excluding first and last)
-        $core = substr($placeholderForModifiedPhrase, 1, -1);  // exclude first and last char
+        $core = substr($placeholderForModifiedPhrase, 1, -1); 
 
         if (strlen($core) < 3) {
             $placeholderForMiddleCharacters = "Not enough characters";
