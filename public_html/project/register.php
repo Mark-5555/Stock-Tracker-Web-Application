@@ -1,6 +1,6 @@
 <h3>Register</h3>
 <?php
-require(__DIR__ . "/../../lib/functions.php");
+require(__DIR__ . "/../../partials/nav.php");
 ?>
 <form onsubmit="return validate(this)" method="POST">
     <div>
