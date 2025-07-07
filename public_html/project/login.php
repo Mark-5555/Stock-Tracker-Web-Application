@@ -77,5 +77,5 @@ if (isset($_POST["email"], $_POST["password"])) {
     }
 }
 
-
+require(__DIR__."/../../partials/flash.php");
 ?>
