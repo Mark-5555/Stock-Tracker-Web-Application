@@ -23,9 +23,14 @@ require(__DIR__ . "/../../partials/nav.php");
 </form>
 <script>
     function validate(form) {
-        //TODO 1: implement JavaScript validation (you'll do this on your own towards the end of Milestone1)
-        //ensure it returns false for an error and true for success
+        const pw = form.password.value;
+        const confirm = form.confirm.value;
 
+        if (pw !== confirm) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        
         return true;
     }
 </script>
@@ -82,13 +87,12 @@ if (isset($_POST["email"], $_POST["password"], $_POST["confirm"], $_POST["userna
         $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES (:email, :password, :username)");
         try {
             $stmt->execute([':email' => $email, ':password' => $hashed_password, ':username' => $username]);
-   
+
             flash("Successfully registered! You can now log in.", "success");
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             // Handle duplicate email/username
             users_check_duplicate($e);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             flash("There was an error registering. Please try again.", "danger");
             error_log("Registration Error: " . var_export($e, true)); // log the technical error for debugging
         }
