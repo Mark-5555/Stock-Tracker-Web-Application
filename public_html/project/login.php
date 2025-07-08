@@ -104,6 +104,7 @@ if (isset($_POST["email"], $_POST["password"])) {
                             ]));
 
 
+
                             die(header("Location: landing.php"));
                         } else {
                             //echo "Invalid password<br>";
