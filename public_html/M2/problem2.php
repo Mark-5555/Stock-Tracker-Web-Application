@@ -39,8 +39,6 @@ function sumValues($arr, $arrayNumber)
         $total += $value;
     }
 
-    $modifiedTotal = number_format($total, 2);
-
     // Solve Challenge 2 here
     $modifiedTotal = number_format($total, 2);
 
