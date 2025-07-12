@@ -20,23 +20,32 @@ $a4 = [
     ["id" => 8, "make" => "Audi", "model" => "A4", "year" => 1990]
 ];
 
-function processCars($cars) {
+function processCars($cars)
+{
     printProblemData($cars);
     echo "<br>New Properties Output:<br>";
-    
+
     // Note: use the $cars variable to iterate over, don't directly touch $a1-$a4
     // TODO Objective: Add logic to create a new array ($processedCars) with original properties plus age and isClassic. isClassic is a boolean based on today\'s year and the $classic_age variable.
     $currentYear = null; // determine current year
     $processedCars = []; // result array
     $classic_age = 25; // don't change this value
     // Start edits
-   
+
+    foreach ($cars as $car) {
+        $age = $currentYear - $car["year"];
+        $car["age"] = $age;
+        $car["isClassic"] = $age >= $classic_age;
+        $processedCars[] = $car;
+    }
+
+    print_r($processedCars); // Or use printProblemData($processedCars);
+
     // End edits
     echo "<pre>" . var_export($processedCars, true) . "</pre>";
-    
 }
-$ucid = "mt85"; // replace with your UCID
-printHeader($ucid, 2); 
+$ucid = "may23"; // replace with your UCID
+printHeader($ucid, 2);
 ?>
 <table>
     <thead>
@@ -64,7 +73,7 @@ printHeader($ucid, 2);
         </tr>
     </tbody>
 </table>
-<?php printFooter($ucid,2); ?>
+<?php printFooter($ucid, 2); ?>
 <style>
     table {
         border-spacing: 1em 3em;
