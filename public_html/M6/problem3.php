@@ -42,22 +42,31 @@ $a4_activities = [
     ["userId" => 8, "activity" => "Surfing"]
 ];
 
-function joinArrays($users, $activities) {
+function joinArrays($users, $activities)
+{
     printProblemMultiData($users, $activities);
     echo "<br>Joined output:<br>";
-    
+
     // Note: use the $users and $activities variables to iterate over, don't directly touch $a1-$a4 arrays
     // TODO Objective: Add logic to join both arrays on the userId property into one $joined array
     $joined = []; // result array
     // Start edits
-    
+    foreach ($users as $user) {
+        foreach ($activities as $activity) {
+            if ($user["userId"] === $activity["userId"]) {
+                $joined[] = array_merge($user, $activity);
+                break; // stop once a match is found
+            }
+        }
+    }
+
 
     // End edits
     echo "<pre>" . var_export($joined, true) . "</pre>";
 }
 
-$ucid = "mt85"; // replace with your UCID
-printHeader($ucid, 3); 
+$ucid = "may23"; // replace with your UCID
+printHeader($ucid, 3);
 ?>
 <table>
     <thead>
@@ -85,7 +94,7 @@ printHeader($ucid, 3);
         </tr>
     </tbody>
 </table>
-<?php printFooter($ucid,3); ?>
+<?php printFooter($ucid, 3); ?>
 <style>
     table {
         border-spacing: 1em 3em;
