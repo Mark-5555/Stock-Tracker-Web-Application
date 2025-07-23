@@ -75,4 +75,35 @@ if (isset($_POST["symbol"], $_POST["interval"], $_POST["start_date"], $_POST["en
     </form>
 </div>
 
+<script>
+document.querySelector("form").addEventListener("submit", function (e) {
+  const symbol = document.querySelector("input[name='symbol']").value.trim();
+  const interval = document.querySelector("input[name='interval']").value.trim();
+  const startDate = new Date(document.querySelector("input[name='start_date']").value);
+  const endDate = new Date(document.querySelector("input[name='end_date']").value);
+
+  const validSymbol = /^[A-Z.]{1,10}$/.test(symbol); // Only uppercase letters and dots
+  const allowedIntervals = ["1day", "1h", "15min"];
+
+  let error = "";
+
+  if (!validSymbol) {
+    error += "Symbol must be uppercase letters (e.g., AAPL).\n";
+  }
+
+  if (!allowedIntervals.includes(interval)) {
+    error += "Interval must be one of: 1day, 1h, 15min.\n";
+  }
+
+  if (startDate > endDate) {
+    error += "Start date must be before or equal to end date.\n";
+  }
+
+  if (error) {
+    e.preventDefault();
+    alert(error);
+  }
+});
+</script>
+
 <?php require(__DIR__ . "/../../../partials/flash.php"); ?>
