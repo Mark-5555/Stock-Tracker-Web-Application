@@ -1,0 +1,8 @@
+CREATE TABLE stocks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    symbol VARCHAR(10) NOT NULL,
+    `interval` VARCHAR(10) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
