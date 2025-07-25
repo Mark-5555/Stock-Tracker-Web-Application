@@ -35,7 +35,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <td><?= htmlspecialchars($row["interval"]) ?></td>
       <td><?= $row["start_date"] ?> → <?= $row["end_date"] ?></td>
 <td>
-  <a href="admin/view_stock.php?id=<?= $row["id"] ?>">View</a> |
+  <a href="view_stock.php?id=<?= $row["id"] ?>">View</a> |
   <a href="admin/edit_stock.php?id=<?= $row["id"] ?>">Edit</a> |
   <a href="admin/delete_stock.php?id=<?= $row["id"] ?>" onclick="return confirm('Delete this record?')">Delete</a>
 </td>
