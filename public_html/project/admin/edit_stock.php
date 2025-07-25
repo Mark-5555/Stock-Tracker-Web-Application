@@ -1,8 +1,8 @@
 <?php
-require(__DIR__ . "/../../partials/nav.php");
-require_once(__DIR__ . "/../../lib/db.php");
-require_once(__DIR__ . "/../../partials/flash.php");
-require_once(__DIR__ . "/../../lib/redirect.php");
+require(__DIR__ . "/../../../partials/nav.php");
+require_once(__DIR__ . "/../../../lib/db.php");
+require_once(__DIR__ . "/../../../partials/flash.php");
+require_once(__DIR__ . "/../../../lib/redirect.php");
 
 $id = $_GET["id"] ?? null;
 if (!$id || !is_numeric($id)) {
@@ -16,7 +16,7 @@ $stmt->execute([":id" => $id]);
 $stock = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$stock) {
   flash("Stock not found");
-  redirect("list_stocks.php");
+redirect("../list_stock.php");
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -49,4 +49,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <input type="date" name="end_date" required value="<?= $stock["end_date"] ?>" />
   <input type="submit" value="Update" />
 </form>
-<?php require(__DIR__ . "/../../partials/flash.php"); ?>
+<?php require(__DIR__ . "/../../../partials/flash.php"); ?>
