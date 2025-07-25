@@ -37,6 +37,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     redirect("edit_stock.php?id=$id");
 }
 ?>
+
+<script>
+function validateForm() {
+  const symbol = document.querySelector('input[name="symbol"]').value.trim();
+  const interval = document.querySelector('input[name="interval"]').value.trim();
+  const start = document.querySelector('input[name="start_date"]').value;
+  const end = document.querySelector('input[name="end_date"]').value;
+
+  if (!symbol || !interval || !start || !end) {
+    alert("All fields are required.");
+    return false;
+  }
+  if (new Date(end) < new Date(start)) {
+    alert("End date must be after start date.");
+    return false;
+  }
+  return true;
+}
+</script>
+
 <h1>Edit Stock</h1>
 <form method="POST">
   <label>Symbol</label>
@@ -50,3 +70,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <input type="submit" value="Update" />
 </form>
 <?php require(__DIR__ . "/../../../partials/flash.php"); ?>
+
+
