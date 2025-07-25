@@ -25,8 +25,8 @@ if (!$stock) {
   <li><strong>Interval:</strong> <?= htmlspecialchars($stock["interval"]) ?></li>
   <li><strong>Date Range:</strong> <?= $stock["start_date"] ?> to <?= $stock["end_date"] ?></li>
 </ul>
-<a href="../edit_stock.php?id=<?= $stock["id"] ?>">Edit</a> |
-<a href="../delete_stock.php?id=<?= $stock["id"] ?>" onclick="return confirm('Are you sure?')">Delete</a>
+<a href="admin/edit_stock.php?id=<?= $stock["id"] ?>">Edit</a> |
+<a href="admin/delete_stock.php?id=<?= $stock["id"] ?>" onclick="return confirm('Are you sure?')">Delete</a>
 
 <?php require(__DIR__ . "/../../partials/flash.php"); ?>
 
