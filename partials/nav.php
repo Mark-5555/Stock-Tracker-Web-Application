@@ -30,15 +30,19 @@ require(__DIR__."/../lib/functions.php");
         <?php if (is_logged_in()) : ?>
             <li><a href="<?php get_url('landing.php', true);?>">Landing</a></li>
             <li><a href="<?php get_url('profile.php', true);?>">Profile</a></li>
+            <li><a href="<?php get_url('list_stock.php', true);?>">List Stocks</a></li>
+            
         <?php endif; ?>
         <?php if (!is_logged_in()) : ?>
             <li><a href="<?php get_url('login.php', true);?>">Login</a></li>
             <li><a href="<?php get_url('register.php', true);?>">Register</a></li>
+            
         <?php endif; ?>
         <?php if (has_role("Admin")) : ?>
             <li><a href="<?php get_url('admin/create_role.php', true); ?>">Create Role</a></li>
             <li><a href="<?php get_url('admin/list_roles.php', true); ?>">List Roles</a></li>
             <li><a href="<?php get_url('admin/assign_roles.php', true); ?>">Assign Roles</a></li>
+            <li><a href="<?php get_url('admin/create_stock.php', true);?>">Create Stock</a></li>
         <?php endif; ?>
         <?php if (is_logged_in()) : ?>
             <li><a href="<?php get_url('logout.php', true);?>">Logout</a></li>
