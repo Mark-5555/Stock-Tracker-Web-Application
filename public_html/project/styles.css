@@ -13,12 +13,12 @@
 
     .alert-primary {
         background-color: #cfe2ff;
-        color: #084298;
+        color: #0b4075;
     }
 
     .alert-secondary {
         background-color: #e2e3e5;
-        color: #41464b;
+        color: #1000ec;
     }
 
     .alert-success {
@@ -58,7 +58,7 @@ nav li {
 }
 
 nav li a {
-    color: rgb(4, 179, 120);
+    color: greenyellow;
     padding: .25rem;
 }
 nav li a:hover {
@@ -99,4 +99,14 @@ input[type="submit"]:hover {
 }
 input[type="submit"]:active {
      transform: scale(.75)
+}
+
+a {
+  color: cyan; 
+  padding: .25rem;
+}
+
+a:hover {
+  background-color: #004080; 
+  color: #fff;
 }
