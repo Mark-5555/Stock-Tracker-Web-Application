@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  // Handle association toggles
   if (
     isset($_POST["associate"]) &&
     isset($_POST["stock_ids"], $_POST["user_ids"]) &&
@@ -79,23 +80,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   </div>
 
   <?php if ($stocks || $users): ?>
-    <h3>Stocks</h3>
-    <?php foreach ($stocks as $s): ?>
-      <div>
-        <input type="checkbox" name="stock_ids[]" value="<?= $s['id'] ?>" id="stock_<?= $s['id'] ?>" />
-        <label for="stock_<?= $s['id'] ?>"><?= htmlspecialchars($s['symbol']) ?></label>
-      </div>
-    <?php endforeach; ?>
+    <?php if ($stocks): ?>
+      <h3>Stocks</h3>
+      <?php foreach ($stocks as $s): ?>
+        <div>
+          <input type="checkbox" name="stock_ids[]" value="<?= $s['id'] ?>" id="stock_<?= $s['id'] ?>" />
+          <label for="stock_<?= $s['id'] ?>"><?= htmlspecialchars($s['symbol']) ?></label>
+        </div>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <p>No matching stocks found</p>
+    <?php endif; ?>
 
-    <h3>Users</h3>
-    <?php foreach ($users as $u): ?>
-      <div>
-        <input type="checkbox" name="user_ids[]" value="<?= $u['id'] ?>" id="user_<?= $u['id'] ?>" />
-        <label for="user_<?= $u['id'] ?>"><?= htmlspecialchars($u['username']) ?></label>
-      </div>
-    <?php endforeach; ?>
+    <?php if ($users): ?>
+      <h3>Users</h3>
+      <?php foreach ($users as $u): ?>
+        <div>
+          <input type="checkbox" name="user_ids[]" value="<?= $u['id'] ?>" id="user_<?= $u['id'] ?>" />
+          <label for="user_<?= $u['id'] ?>"><?= htmlspecialchars($u['username']) ?></label>
+        </div>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <p>No matching users found</p>
+    <?php endif; ?>
 
     <button type="submit" name="associate">Toggle Associations</button>
+  <?php elseif ($_SERVER["REQUEST_METHOD"] === "POST"): ?>
+    <p>No results available</p>
   <?php endif; ?>
 </form>
 
