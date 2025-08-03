@@ -37,8 +37,13 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <td>
   <a href="view_stock.php?id=<?= $row["id"] ?>">View</a> |
   <a href="admin/edit_stock.php?id=<?= $row["id"] ?>">Edit</a> |
-  <a href="admin/delete_stock.php?id=<?= $row["id"] ?>" onclick="return confirm('Delete this record?')">Delete</a>
+  <a href="admin/delete_stock.php?id=<?= $row["id"] ?>" onclick="return confirm('Delete this record?')">Delete</a> |
+  <form method="POST" action="admin/create_tracker.php" style="display:inline;">
+    <input type="hidden" name="stock_id" value="<?= $row["id"] ?>" />
+    <button type="submit" style="background:none; border:none; color:cyan; text-decoration:underline; cursor:pointer; padding:0;">Track</button>
+  </form>
 </td>
+
 
     </tr>
   <?php endforeach; ?>
