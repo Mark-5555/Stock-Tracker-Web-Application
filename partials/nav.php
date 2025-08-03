@@ -46,6 +46,7 @@ require(__DIR__."/../lib/functions.php");
             <li><a href="<?php get_url('admin/assign_roles.php', true); ?>">Assign Roles</a></li>
             <li><a href="<?php get_url('admin/admin_tracker_list.php', true);?>">Trackers List (Admin)</a></li>
             <li><a href="<?php get_url('admin/admin_assign_tracker.php', true);?>">Assign Tracker</a></li>
+            <li><a href="<?php get_url('admin/unassociated_stocks.php', true);?>">Unassociated Stocks</a></li>
         <?php endif; ?>
         <?php if (is_logged_in()) : ?>
             <li><a href="<?php get_url('logout.php', true);?>">Logout</a></li>
