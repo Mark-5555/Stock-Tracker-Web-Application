@@ -45,7 +45,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <tbody>
     <?php foreach ($results as $r): ?>
       <tr>
-        <td><a href="../users/profile.php?id=<?= htmlspecialchars($r["username"]) ?>"><?= htmlspecialchars($r["username"]) ?></a></td>
+        <td><a href="../profile.php?id=<?= htmlspecialchars($r["username"]) ?>"><?= htmlspecialchars($r["username"]) ?></a></td>
         <td><?= htmlspecialchars($r["symbol"]) ?></td>
         <td><?= $r["start_date"] ?> → <?= $r["end_date"] ?></td>
         <td>
