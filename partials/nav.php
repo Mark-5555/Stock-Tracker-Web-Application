@@ -30,7 +30,7 @@ require(__DIR__."/../lib/functions.php");
         <?php if (is_logged_in()) : ?>
             <li><a href="<?php get_url('landing.php', true);?>">Landing</a></li>
             <li><a href="<?php get_url('profile.php', true);?>">Profile</a></li>
-            <li><a href="<?php get_url('list_stock.php', true);?>">List Stocks</a></li>
+            <li><a href="<?php get_url('list_stock.php', true);?>">Stocks List</a></li>
             
         <?php endif; ?>
         <?php if (!is_logged_in()) : ?>
@@ -39,10 +39,12 @@ require(__DIR__."/../lib/functions.php");
             
         <?php endif; ?>
         <?php if (has_role("Admin")) : ?>
-            <li><a href="<?php get_url('admin/create_role.php', true); ?>">Create Role</a></li>
-            <li><a href="<?php get_url('admin/list_roles.php', true); ?>">List Roles</a></li>
-            <li><a href="<?php get_url('admin/assign_roles.php', true); ?>">Assign Roles</a></li>
             <li><a href="<?php get_url('admin/create_stock.php', true);?>">Create Stock</a></li>
+            <li><a href="<?php get_url('admin/list_roles.php', true); ?>">List Roles</a></li>
+            <li><a href="<?php get_url('admin/create_role.php', true); ?>">Create Role</a></li>
+            <li><a href="<?php get_url('admin/assign_roles.php', true); ?>">Assign Roles</a></li>
+            <li><a href="<?php get_url('admin/admin_tracker_list.php', true);?>">Trackers List</a></li>
+            <li><a href="<?php get_url('admin/admin_assign_tracker.php', true);?>">Assign Tracker</a></li>
         <?php endif; ?>
         <?php if (is_logged_in()) : ?>
             <li><a href="<?php get_url('logout.php', true);?>">Logout</a></li>
