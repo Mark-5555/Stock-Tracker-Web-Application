@@ -14,39 +14,67 @@ $stockTerm = $_POST["stock_term"] ?? "";
 $userTerm = $_POST["user_term"] ?? "";
 $stocks = $users = [];
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && (strlen($stockTerm) || strlen($userTerm))) {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  // Search stock symbols
   if ($stockTerm) {
     $stmt = $db->prepare("SELECT id, symbol FROM stocks WHERE symbol LIKE :st LIMIT 25");
     $stmt->execute([":st" => "%$stockTerm%"]);
     $stocks = $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  // Search usernames
   if ($userTerm) {
     $stmt = $db->prepare("SELECT id, username FROM Users WHERE username LIKE :ut LIMIT 25");
     $stmt->execute([":ut" => "%$userTerm%"]);
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
-  if (isset($_POST["associate"]) && is_array($_POST["stock_ids"]) && is_array($_POST["user_ids"])) {
-    $stmt = $db->prepare("INSERT INTO Tracker (user_id, stock_id) VALUES(:uid, :sid)
-        ON DUPLICATE KEY UPDATE user_id = user_id");
+
+  if (
+    isset($_POST["associate"]) &&
+    isset($_POST["stock_ids"], $_POST["user_ids"]) &&
+    is_array($_POST["stock_ids"]) &&
+    is_array($_POST["user_ids"])
+  ) {
     foreach ($_POST["user_ids"] as $uid) {
       foreach ($_POST["stock_ids"] as $sid) {
-        try {
-          $stmt->execute([":uid" => $uid, ":sid" => $sid]);
-        } catch (PDOException $e) {
-          flash("Error managing association", "danger");
+        // Check if association exists
+        $checkStmt = $db->prepare("SELECT id FROM Tracker WHERE user_id = :uid AND stock_id = :sid");
+        $checkStmt->execute([":uid" => $uid, ":sid" => $sid]);
+        $exists = $checkStmt->fetch();
+
+        if ($exists) {
+          // Delete if exists
+          $deleteStmt = $db->prepare("DELETE FROM Tracker WHERE user_id = :uid AND stock_id = :sid");
+          try {
+            $deleteStmt->execute([":uid" => $uid, ":sid" => $sid]);
+          } catch (PDOException $e) {
+            flash("Error removing: " . $e->getMessage(), "danger");
+          }
+        } else {
+          // Insert if not exists
+          $insertStmt = $db->prepare("INSERT INTO Tracker (user_id, stock_id) VALUES (:uid, :sid)");
+          try {
+            $insertStmt->execute([":uid" => $uid, ":sid" => $sid]);
+          } catch (PDOException $e) {
+            flash("Error adding: " . $e->getMessage(), "danger");
+          }
         }
       }
     }
-    flash("Associations updated", "success");
+    flash("Associations toggled successfully", "success");
     redirect("admin_assign_tracker.php");
   }
 }
 ?>
+
 <h1>Admin Stock Tracker Assignments</h1>
+
 <form method="POST">
   <div>
-    <label>Stock Symbol (partial):</label><input name="stock_term" value="<?=htmlspecialchars($stockTerm)?>" />
-    <label>Username (partial):</label><input name="user_term" value="<?=htmlspecialchars($userTerm)?>" />
+    <label>Stock Symbol (partial):</label>
+    <input name="stock_term" value="<?= htmlspecialchars($stockTerm) ?>" />
+    <label>Username (partial):</label>
+    <input name="user_term" value="<?= htmlspecialchars($userTerm) ?>" />
     <input type="submit" value="Search" />
   </div>
 
@@ -54,16 +82,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && (strlen($stockTerm) || strlen($user
     <h3>Stocks</h3>
     <?php foreach ($stocks as $s): ?>
       <div>
-        <input type="checkbox" name="stock_ids[]" value="<?=$s['id']?>" id="stock_<?=$s['id']?>" />
-        <label for="stock_<?=$s['id']?>"><?=htmlspecialchars($s['symbol'])?></label>
+        <input type="checkbox" name="stock_ids[]" value="<?= $s['id'] ?>" id="stock_<?= $s['id'] ?>" />
+        <label for="stock_<?= $s['id'] ?>"><?= htmlspecialchars($s['symbol']) ?></label>
       </div>
     <?php endforeach; ?>
 
     <h3>Users</h3>
     <?php foreach ($users as $u): ?>
       <div>
-        <input type="checkbox" name="user_ids[]" value="<?=$u['id']?>" id="user_<?=$u['id']?>" />
-        <label for="user_<?=$u['id']?>"><?=htmlspecialchars($u['username'])?></label>
+        <input type="checkbox" name="user_ids[]" value="<?= $u['id'] ?>" id="user_<?= $u['id'] ?>" />
+        <label for="user_<?= $u['id'] ?>"><?= htmlspecialchars($u['username']) ?></label>
       </div>
     <?php endforeach; ?>
 
