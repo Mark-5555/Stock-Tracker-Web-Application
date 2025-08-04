@@ -17,5 +17,5 @@
 - Milestone 3
   - https://github.com/Mark-5555/may23-IT202-450/blob/prod/public_html/project/may23_IT202-450-M2025_it202-milestone-3_08-03-2025_03-48-25.pdf
 - Demo Link
-  - (add youtube link to unlisted or public demo) Note you'll need to verify your youtube account to upload videos > 15mins
+  - https://youtu.be/2Kmbuje5WlA
   
