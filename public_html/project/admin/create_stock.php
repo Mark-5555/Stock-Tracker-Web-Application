@@ -14,7 +14,7 @@ if (isset($_POST["symbol"], $_POST["interval"], $_POST["start_date"], $_POST["en
     $start = $_POST["start_date"];
     $end = $_POST["end_date"];
 
-    // Save stock metadata
+    
     $stmt = $db->prepare("INSERT INTO stocks (symbol, `interval`, start_date, end_date) VALUES (:symbol, :interval, :start, :end)");
     $stmt->execute([
         ":symbol" => $symbol,
@@ -24,7 +24,7 @@ if (isset($_POST["symbol"], $_POST["interval"], $_POST["start_date"], $_POST["en
     ]);
     $stock_id = $db->lastInsertId();
 
-    // API call to Twelve Data
+    
     $params = [
         "symbol" => $symbol,
         "interval" => $interval,
@@ -82,7 +82,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
   const startDate = new Date(document.querySelector("input[name='start_date']").value);
   const endDate = new Date(document.querySelector("input[name='end_date']").value);
 
-  const validSymbol = /^[A-Z.]{1,10}$/.test(symbol); // Only uppercase letters and dots
+  const validSymbol = /^[A-Z.]{1,10}$/.test(symbol); 
   const allowedIntervals = ["1day", "1h", "15min"];
 
   let error = "";
