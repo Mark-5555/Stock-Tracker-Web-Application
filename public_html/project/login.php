@@ -96,6 +96,14 @@ if (isset($_POST["email"], $_POST["password"])) {
                             }
                             //save roles or empty array
                             $_SESSION["user"]["roles"] = isset($roles) ? $roles : [];
+                            error_log("Login Session: " . json_encode([
+                                "id" => $user["id"] ?? null,
+                                "username" => $user["username"] ?? null,
+                                "email" => $user["email"] ?? null,
+                                "roles" => array_column($roles ?? [], "name")
+                            ]));
+
+
 
                             die(header("Location: landing.php"));
                         } else {
