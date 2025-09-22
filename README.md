@@ -1,2 +1,2 @@
-# Stock-Tracker-Web-Application
+# Stock Tracker Web Application
 A web app that allows users to register, log in, and manage profiles, perform CRUD operations on stock data from an external API, and track specific stocks of interest. It includes role-based access, layered frontend and backend validations, and admin dashboards for managing user–stock associations. The app is deployed through a GitHub to Heroku pipeline with a normalized MySQL schema ensuring consistency and scalability
